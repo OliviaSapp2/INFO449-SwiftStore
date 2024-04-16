@@ -57,13 +57,29 @@ TOTAL: $1.99
         XCTAssertEqual(797, receipt.total())
 
         let expectedReceipt = """
-Receipt:
-Beans (8oz Can): $1.99
-Pencil: $0.99
-Granols Bars (Box, 8ct): $4.99
-------------------
-TOTAL: $7.97
-"""
+        Receipt:
+        Beans (8oz Can): $1.99
+        Pencil: $0.99
+        Granols Bars (Box, 8ct): $4.99
+        ------------------
+        TOTAL: $7.97
+        """
+        XCTAssertEqual(expectedReceipt, receipt.output())
+    }
+    
+    func testAddSingleItem(){
+        register.scan(Item(name: "Coca-Cola", priceEach: 299))
+        XCTAssertEqual(299, register.subtotal())
+        
+        let receipt = register.total()
+        XCTAssertEqual(299, receipt.total())
+        
+        let expectedReceipt = """
+        Receipt:
+        Coca-Cola: $2.99
+        ------------------
+        TOTAL: $2.99
+        """
         XCTAssertEqual(expectedReceipt, receipt.output())
     }
 }
